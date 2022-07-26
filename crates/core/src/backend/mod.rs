@@ -56,6 +56,11 @@ pub enum Flavor {
     ClassicTbc,
     ClassicPtr,
     ClassicBeta,
+    #[serde(
+        alias = "wrath",
+        alias = "wotlk"
+    )]
+    ClassicWrath
 }
 
 impl std::fmt::Display for Flavor {
@@ -71,6 +76,7 @@ impl std::fmt::Display for Flavor {
                 Flavor::ClassicTbc => "classic_tbc",
                 Flavor::ClassicBeta => "classic_beta",
                 Flavor::ClassicPtr => "classic_ptr",
+                Flavor::ClassicWrath => "classic_beta",
             }
         )
     }
@@ -81,8 +87,9 @@ impl Flavor {
     pub fn base_flavor(self) -> Flavor {
         match self {
             Flavor::Retail | Flavor::RetailPtr | Flavor::RetailBeta => Flavor::Retail,
-            Flavor::ClassicTbc | Flavor::ClassicPtr | Flavor::ClassicBeta => Flavor::ClassicTbc,
-            Flavor::ClassicEra => Flavor::ClassicEra,
+            Flavor::ClassicWrath | Flavor::ClassicBeta => Flavor::ClassicWrath,
+            Flavor::ClassicTbc | Flavor::ClassicPtr => Flavor::ClassicTbc,
+            Flavor::ClassicEra => Flavor::ClassicEra
         }
     }
 }
